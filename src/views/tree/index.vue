@@ -1,78 +1,71 @@
 <template>
   <div class="app-container">
-    <el-input v-model="filterText" placeholder="Filter keyword" style="margin-bottom:30px;" />
-
-    <el-tree
-      ref="tree2"
-      :data="data2"
-      :props="defaultProps"
-      :filter-node-method="filterNode"
-      class="filter-tree"
-      default-expand-all
-    />
-
+    <el-form ref="form" :model="form" label-width=" 200px">
+      <el-form-item label="Company Overview">
+        <el-input v-model="form.overview" />
+      </el-form-item>
+      <el-form-item label="Financial Information">
+        <el-input v-model="form.financial" />
+      </el-form-item>
+      <el-form-item label="Management Information">
+        <el-input v-model="form.management" />
+      </el-form-item>
+      <el-form-item label="Use of Proceeds">
+        <el-input v-model="form.use" />
+      </el-form-item>
+      <el-form-item label="Risk Factors">
+        <el-input v-model="form.risk" />
+      </el-form-item>
+      <el-form-item label="Offering Terms">
+        <el-input v-model="form.offering" />
+      </el-form-item>
+      <el-form-item label="Legal and Regulatory Information">
+        <el-input v-model="form.legal" />
+      </el-form-item>
+      <el-form-item label="Price">
+        <el-input v-model="form.price" />
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit">Create</el-button>
+        <el-button @click="onCancel">Cancel</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
 export default {
-
   data() {
     return {
-      filterText: '',
-      data2: [{
-        id: 1,
-        label: 'Level one 1',
-        children: [{
-          id: 4,
-          label: 'Level two 1-1',
-          children: [{
-            id: 9,
-            label: 'Level three 1-1-1'
-          }, {
-            id: 10,
-            label: 'Level three 1-1-2'
-          }]
-        }]
-      }, {
-        id: 2,
-        label: 'Level one 2',
-        children: [{
-          id: 5,
-          label: 'Level two 2-1'
-        }, {
-          id: 6,
-          label: 'Level two 2-2'
-        }]
-      }, {
-        id: 3,
-        label: 'Level one 3',
-        children: [{
-          id: 7,
-          label: 'Level two 3-1'
-        }, {
-          id: 8,
-          label: 'Level two 3-2'
-        }]
-      }],
-      defaultProps: {
-        children: 'children',
-        label: 'label'
+      form: {
+        overview: '',
+        financial: '',
+        management: '',
+        use: '',
+        legal: '',
+        risk: '',
+        offering: '',
+        price: ''
       }
     }
   },
-  watch: {
-    filterText(val) {
-      this.$refs.tree2.filter(val)
-    }
-  },
-
   methods: {
-    filterNode(value, data) {
-      if (!value) return true
-      return data.label.indexOf(value) !== -1
+    onSubmit() {
+      this.$message('submit!')
+    },
+    onCancel() {
+      this.$message({
+        message: 'cancel!',
+        type: 'warning'
+      })
     }
   }
 }
 </script>
+
+<style scoped>
+.line{
+  text-align: center;
+}
+</style>
 
